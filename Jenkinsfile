@@ -3,6 +3,7 @@ pipeline {
     parameters {
         choice(choices: ['PROD', 'UAT', 'QA'], description: 'The relevant environment for the build and deployment', name: 'ENV')
         string(description: 'The version that is about to be built and deployed', name: 'Version')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
         text(name: 'KEY_VALUE_JSON', defaultValue: '''[
   { "Type": "TypeA", "Evidences": ["a", "b", "c"] },
   { "Type": "TypeB", "Evidences": ["d", "e"] },
@@ -43,8 +44,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'echo $SERVICE_CREDS'
-                    sh 'echo "Service password is $SERVICE_CREDS_PSW"'
+                    echo "Password: ${params.PASSWORD}"
                 }
             }
         }
