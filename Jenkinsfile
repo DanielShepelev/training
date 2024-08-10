@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'echo "SSH private key is located at $SSH_CREDS"'
+                    sh 'Let's see: $SERVICE_CREDS"'
                 }
             }
         }
