@@ -28,7 +28,7 @@ pipeline {
                                  for(item in keyValueList[i]["Evidences"]){
                                      fullList.add(item)
                                  }
-                                 for(item in keyValueList[j]["Evidences"]]){
+                                 for(item in keyValueList[j]["Evidences"]){
                                      fullList.add(item)
                                  }
                                  
