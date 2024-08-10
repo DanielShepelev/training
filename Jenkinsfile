@@ -28,11 +28,13 @@ pipeline {
                                 if (!keyValueList[i]["Evidences"].disjoint(keyValueList[j]["Evidences"])) {
                                     fullList.addAll(keyValueList[i]["Evidences"]) // Add all elements at once
                                     fullList.addAll(keyValueList[j]["Evidences"])
+                                    fullList.unique()
+                                    println(fullList)
+                                    fullList = [] // Reinitialize instead of clearing
                 }
             }
         }
     }
-    println(fullList)
     fullList = [] // Reinitialize instead of clearing
 }
 
