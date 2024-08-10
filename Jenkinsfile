@@ -3,6 +3,8 @@ pipeline {
     parameters {
         choice choices: ['PROD', 'UAT', 'QA'], description: 'The relevant environment for the build and deployment', name: 'ENV'
         string description: 'The version that is about to be built and deployed', name: 'Version'
+        string(name: 'KEY_VALUE_JSON', defaultValue: '{"key1":"value1","key2":"value2"}', description: 'Enter a JSON object as a string (e.g., {"key1":"value1","key2":"value2"})')
+        
     }
     stages {
         stage('Build') {
