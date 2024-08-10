@@ -17,28 +17,25 @@ pipeline {
     stages {
         stage('Groovy practice'){
             steps{
-                script{
-                def jsonSlurper = new groovy.json.JsonSlurper()
-                def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
-                def fullList = []
-                for(int i = 0;i<keyValueList.size;i++) {
-                     for(int j = 1;j<keyValueList.size;j++) {
-                         if(keyValueList[i]["Type"] ==  keyValueList[j]["Type"]){
-                             if(!([keyValueList[i]["Evidences"]].disjoint(keyValueList[j]["Evidences"]))){
-                                 for(item in keyValueList[i]["Evidences"]){
-                                     fullList.add(item)
-                                 }
-                                 for(item in keyValueList[j]["Evidences"]){
-                                     fullList.add(item)
-                                 }
-                                 
-                             }
-                         }
-                         println(fullList)
-                         fullList.clear()
-                      }
-                  }
+                script {
+                    def jsonSlurper = new groovy.json.JsonSlurper()
+                    def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
+                    def fullList = []
+
+                    for (int i = 0; i < keyValueList.size(); i++) {
+                        for (int j = i + 1; j < keyValueList.size(); j++) { // Avoid comparing the same elements
+                            if (keyValueList[i]["Type"] == keyValueList[j]["Type"]) {
+                                if (!keyValueList[i]["Evidences"].disjoint(keyValueList[j]["Evidences"])) {
+                                    fullList.addAll(keyValueList[i]["Evidences"]) // Add all elements at once
+                                    fullList.addAll(keyValueList[j]["Evidences"])
                 }
+            }
+        }
+    }
+    println(fullList)
+    fullList.clear()
+}
+
                 
             }
             }
