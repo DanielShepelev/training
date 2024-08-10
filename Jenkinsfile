@@ -33,7 +33,7 @@ pipeline {
         }
     }
     println(fullList)
-    fullList.clear()
+    fullList = [] // Reinitialize instead of clearing
 }
 
                 
