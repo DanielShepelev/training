@@ -13,7 +13,7 @@ pipeline {
         stage('Example Deploy') {
             steps {
                 script {
-                    sh "printenv" 
+                    sh "bash hello.sh" 
                     }
                 }
             }
