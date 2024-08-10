@@ -27,7 +27,7 @@ pipeline {
                     // Iterate over the list and print the Type and Evidences
                     keyValueList.each { entry ->
                         echo "Type: ${entry.Type}"
-                        echo "Evidences: ${entry.Evidences.join(', ')}"
+                        echo "Evidences: ${entry.Evidences[1]}"
                     }
                 }
             }
