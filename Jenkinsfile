@@ -14,8 +14,8 @@ pipeline {
         stage('Example Deploy') {
             steps {
                 script {
-                    // Print all environment variables available in Jenkins
-                    env.each { k, v -> echo "${k} = ${v}" }
+                    groovyVars = [:] << getBinding().getVariables()
+                    groovyVars.each  {k,v -> print "$k = $v"}
                 }
             }
         }
