@@ -18,11 +18,10 @@ pipeline {
         stage('Groovy practice'){
             steps{
                 script {
-                    def jsonSlurper = new groovy.json.JsonSlurper()
-                    def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
-                    def fullList = []
+                    def func(keyValueList){
+                        def fullList = []
 
-                    for (int i = 0; i < keyValueList.size(); i++) {
+                        for (int i = 0; i < keyValueList.size(); i++) {
                         for (int j = i + 1; j < keyValueList.size(); j++) { // Avoid comparing the same elements
                             if (keyValueList[i]["Type"] == keyValueList[j]["Type"]) {
                                 if (!keyValueList[i]["Evidences"].disjoint(keyValueList[j]["Evidences"])) {
@@ -31,12 +30,17 @@ pipeline {
                                     fullList.unique()
                                     println(fullList)
                                     fullList = [] // Reinitialize instead of clearing
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
-    fullList = [] // Reinitialize instead of clearing
-}
+                    
+                    def jsonSlurper = new groovy.json.JsonSlurper()
+                    def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
+                    func(keyValueList)
+                   
+           }
 
                 
             }
