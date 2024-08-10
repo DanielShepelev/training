@@ -13,7 +13,8 @@ pipeline {
         stage('Example Deploy') {
             steps {
                 script {
-                    env.each { key, value -> echo "${key} = ${value}" }
+                    def envVars = System.getenv()
+                    envVars.each { k, v -> echo "${k} = ${v}" }
                 }
             }
         }
