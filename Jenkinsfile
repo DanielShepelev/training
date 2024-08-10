@@ -3,7 +3,20 @@ pipeline {
     parameters {
         choice choices: ['PROD', 'UAT', 'QA'], description: 'The relevant environment for the build and deployment', name: 'ENV'
         string description: 'The version that is about to be built and deployed', name: 'Version'
-        string(name: 'KEY_VALUE_JSON', defaultValue: '{"key1":"value1","key2":"value2"}', description: 'Enter a JSON object as a string (e.g., {"key1":"value1","key2":"value2"})')
+        string(name: 'KEY_VALUE_JSON', defaultValue: '[
+
+  { "Type": "TypeA", "Evidences": ["a", "b", "c"] },
+
+  { "Type": "TypeB", "Evidences": ["d", "e"] },
+
+  { "Type": "TypeA", "Evidences": ["c", "f", "g"] },
+
+  { "Type": "TypeB", "Evidences": ["k", "m", "l"] },
+
+  { "Type": "TypeA", "Evidences": ["f", "n" ] }
+
+]
+', description: 'Enter a JSON object as a string (e.g., {"key1":"value1","key2":"value2"})')
         
     }
     stages {
