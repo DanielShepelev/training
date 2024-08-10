@@ -38,9 +38,12 @@ pipeline {
             }
         }
         stage('Example Deploy') {
+            environment {
+                SERVICE_CREDS = credentials('GitHub_connection')
+            }
             steps {
                 script {
-                    sh "bash hello.sh" 
+                    sh 'echo "SSH private key is located at $SSH_CREDS"'
                 }
             }
         }
