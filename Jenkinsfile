@@ -1,3 +1,21 @@
+def func(keyValueList) {
+    def fullList = []
+
+    for (int i = 0; i < keyValueList.size(); i++) {
+        for (int j = i + 1; j < keyValueList.size(); j++) {
+            if (keyValueList[i]["Type"] == keyValueList[j]["Type"]) {
+                if (!keyValueList[i]["Evidences"].disjoint(keyValueList[j]["Evidences"])) {
+                    fullList.addAll(keyValueList[i]["Evidences"]) // Add all elements at once
+                    fullList.addAll(keyValueList[j]["Evidences"])
+                    fullList = fullList.unique() // Remove duplicates
+                    println(fullList)
+                    fullList = [] // Reinitialize instead of clearing
+                }
+            }
+        }
+    }
+}
+
 pipeline {
     agent any
     parameters {
@@ -18,24 +36,6 @@ pipeline {
         stage('Groovy practice'){
             steps{
                 script {
-                    def func(keyValueList){
-                        def fullList = []
-
-                        for (int i = 0; i < keyValueList.size(); i++) {
-                        for (int j = i + 1; j < keyValueList.size(); j++) { // Avoid comparing the same elements
-                            if (keyValueList[i]["Type"] == keyValueList[j]["Type"]) {
-                                if (!keyValueList[i]["Evidences"].disjoint(keyValueList[j]["Evidences"])) {
-                                    fullList.addAll(keyValueList[i]["Evidences"]) // Add all elements at once
-                                    fullList.addAll(keyValueList[j]["Evidences"])
-                                    fullList.unique()
-                                    println(fullList)
-                                    fullList = [] // Reinitialize instead of clearing
-                                }
-                            }
-                        }
-                    }
-                }
-                    
                     def jsonSlurper = new groovy.json.JsonSlurper()
                     def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
                     func(keyValueList)
