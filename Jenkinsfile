@@ -18,6 +18,19 @@ pipeline {
                 checkout scmGit(branches: [[name: "*/${params.ENV}"]], extensions: [], userRemoteConfigs: [[credentialsId: '92ed90ec-a7e1-42b2-bcde-e4279aab4fb8', url: 'https://github.com/DanielShepelev/training']])
             }
         }
+        stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+        }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
         stage('Parse and Process JSON') {
             steps {
                 script {
@@ -38,18 +51,6 @@ pipeline {
                 sh "printenv | sort"
             }
         }
-        stage('Example') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
         stage('Example Deploy') {
             environment {
                 SERVICE_CREDS = credentials('GitHub_connection')
