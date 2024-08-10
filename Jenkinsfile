@@ -20,8 +20,24 @@ pipeline {
                 script{
                 def jsonSlurper = new groovy.json.JsonSlurper()
                 def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
-                for (item in keyValueList){
-                    println item
+                def fullList = []
+                for(int i = 0;i<keyValueList.size;i++) {
+                     for(int j = 1;<keyValueList.size;j++) {
+                         if(keyValueList[i]["Type"] ==  keyValueList[j]["Type"]){
+                             if(!([keyValueList[i]["Evidences"]].disjoint(keyValueList[j]["Evidences"]))){
+                                 for(item in keyValueList[i]["Evidences"]]){
+                                     fullList.add(item)
+                                 }
+                                 for(item in keyValueList[j]["Evidences"]]){
+                                     fullList.add(item)
+                                 }
+                                 
+                             }
+                         }
+                         println(fullList)
+                         fullList.clear()
+                      }
+                  }
                 }
                 
             }
