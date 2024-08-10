@@ -22,7 +22,7 @@ pipeline {
                 def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
                 def fullList = []
                 for(int i = 0;i<keyValueList.size;i++) {
-                     for(int j = 1;<keyValueList.size;j++) {
+                     for(int j = 1;j<keyValueList.size;j++) {
                          if(keyValueList[i]["Type"] ==  keyValueList[j]["Type"]){
                              if(!([keyValueList[i]["Evidences"]].disjoint(keyValueList[j]["Evidences"]))){
                                  for(item in keyValueList[i]["Evidences"]]){
