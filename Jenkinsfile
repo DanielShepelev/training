@@ -7,14 +7,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo params.ENV
+                echo "ENV Parameter: ${params.ENV}"
+                echo "Version Parameter: ${params.Version}"
             }
         }
         stage('Example Deploy') {
             steps {
                 script {
-                    def envVars = System.getenv()
-                    envVars.each { k, v -> echo "${k} = ${v}" }
+                    // Print all environment variables available in Jenkins
+                    env.each { k, v -> echo "${k} = ${v}" }
                 }
             }
         }
