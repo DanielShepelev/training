@@ -16,13 +16,15 @@ pipeline {
     
     stages {
         stage('Groovy practice'){
-            script{
+            steps{
+                script{
                 def jsonSlurper = new groovy.json.JsonSlurper()
                 def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
                 for (item in keyValueList){
                     println item
                 }
                 
+            }
             }
         }
 
