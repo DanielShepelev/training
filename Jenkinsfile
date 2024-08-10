@@ -7,8 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "ENV Parameter: ${params.ENV}"
-                echo "Version Parameter: ${params.Version}"
+                checkout scmGit(branches: [[name: '*/{params.ENV}']], extensions: [], userRemoteConfigs: [[credentialsId: '92ed90ec-a7e1-42b2-bcde-e4279aab4fb8', url: 'https://github.com/DanielShepelev/training']])
             }
         }
         stage('Example Deploy') {
