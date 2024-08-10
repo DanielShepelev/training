@@ -14,17 +14,7 @@ pipeline {
         stage('Example Deploy') {
             steps {
                 script {
-                    // Print all environment variables available in Jenkins
-                    echo "Printing all environment variables:"
-                    env.each { k, v -> echo "${k} = ${v}" }
-
-                    // Print specific environment variable (e.g., PATH)
-                    if (isUnix()) {
-                        // On Unix-based systems
-                        sh 'echo $PATH'
-                    } else {
-                        // On Windows systems
-                        bat 'echo %PATH%'
+                    sh "printenv" 
                     }
                 }
             }
