@@ -25,7 +25,7 @@ pipeline {
                      for(int j = 1;j<keyValueList.size;j++) {
                          if(keyValueList[i]["Type"] ==  keyValueList[j]["Type"]){
                              if(!([keyValueList[i]["Evidences"]].disjoint(keyValueList[j]["Evidences"]))){
-                                 for(item in keyValueList[i]["Evidences"]]){
+                                 for(item in keyValueList[i]["Evidences"]){
                                      fullList.add(item)
                                  }
                                  for(item in keyValueList[j]["Evidences"]]){
