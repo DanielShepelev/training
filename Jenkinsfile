@@ -11,6 +11,11 @@ pipeline {
                 checkout scmGit(branches: [[name: "*/${params.ENV}"]], extensions: [], userRemoteConfigs: [[credentialsId: '92ed90ec-a7e1-42b2-bcde-e4279aab4fb8', url: 'https://github.com/DanielShepelev/training']])
             }
         }
+        stage('env vars list') {
+            steps {
+                sh "printenv | sort"
+            }
+        }
         stage('Example Deploy') {
             steps {
                 script {
