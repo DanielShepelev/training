@@ -12,55 +12,78 @@ pipeline {
   { "Type": "TypeA", "Evidences": ["f", "n" ] }
 ]''', description: 'Enter a JSON object as a string (e.g., [{ "Type": "TypeA", "Evidences": ["a", "b"] }])')
     }
+    
+    
     stages {
-        stage('Build') {
-            steps {
-                checkout scmGit(branches: [[name: "*/${params.ENV}"]], extensions: [], userRemoteConfigs: [[credentialsId: '92ed90ec-a7e1-42b2-bcde-e4279aab4fb8', url: 'https://github.com/DanielShepelev/training']])
-            }
-        }
-        stage('Example') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        stage('Groovy practice'){
+            script{
+                def jsonSlurper = new groovy.json.JsonSlurper()
+                def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
+                for (item in keyValueList){
+                    println item
                 }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
+                
             }
         }
 
-        stage('Parse and Process JSON') {
-            steps {
-                script {
-                    // Parse the JSON string into a list of maps
-                    def jsonSlurper = new groovy.json.JsonSlurper()
-                    def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
 
-                    // Iterate over the list and print the Type and Evidences
-                    keyValueList.each { entry ->
-                        echo "Type: ${entry.Type}"
-                        echo "Evidences: ${entry.Evidences[1]}"
-                    }
-                }
-            }
-        }
-        stage('env vars list') {
-            steps {
-                sh "printenv | sort"
-            }
-        }
-        stage('Example Deploy') {
-            environment {
-                SERVICE_CREDS = credentials('GitHub_connection')
-            }
-            steps {
-                script {
-                    echo "Password: ${params.PASSWORD}"
-                }
-            }
-        }
+
+
+
+
+
+
+
+
+        
+        // stage('Build') {
+        //     steps {
+        //         checkout scmGit(branches: [[name: "*/${params.ENV}"]], extensions: [], userRemoteConfigs: [[credentialsId: '92ed90ec-a7e1-42b2-bcde-e4279aab4fb8', url: 'https://github.com/DanielShepelev/training']])
+        //     }
+        // }   
+        // stage('Example') {
+        //     input {
+        //         message "Should we continue?"
+        //         ok "Yes, we should."
+        //         submitter "alice,bob"
+        //         parameters {
+        //             string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        //         }
+        //     }
+        //     steps {
+        //         echo "Hello, ${PERSON}, nice to meet you."
+        //     }
+        // }
+
+        // stage('Parse and Process JSON') {
+        //     steps {
+        //         script {
+        //             // Parse the JSON string into a list of maps
+        //             def jsonSlurper = new groovy.json.JsonSlurper()
+        //             def keyValueList = jsonSlurper.parseText(params.KEY_VALUE_JSON)
+
+        //             // Iterate over the list and print the Type and Evidences
+        //             keyValueList.each { entry ->
+        //                 echo "Type: ${entry.Type}"
+        //                 echo "Evidences: ${entry.Evidences[1]}"
+        //             }
+        //         }
+        //     }
+        // }
+        // stage('env vars list') {
+        //     steps {
+        //         sh "printenv | sort"
+        //     }
+        // }
+        // stage('Example Deploy') {
+        //     environment {
+        //         SERVICE_CREDS = credentials('GitHub_connection')
+        //     }
+        //     steps {
+        //         script {
+        //             echo "Password: ${params.PASSWORD}"
+        //         }
+        //     }
+        // }
     }
   }
