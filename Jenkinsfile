@@ -44,6 +44,7 @@ pipeline {
             steps {
                 script {
                     sh 'echo $SERVICE_CREDS'
+                    sh 'echo "Service password is $SERVICE_CREDS_PSW"'
                 }
             }
         }
