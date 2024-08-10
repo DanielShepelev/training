@@ -12,8 +12,8 @@ pipeline {
         }
         stage('Example Deploy') {
                 
-            steps {
-                echo 'Deploying'
+            script {
+                env.each { k, v -> echo "${k} = ${v}" }
             }
         }    
     }   
