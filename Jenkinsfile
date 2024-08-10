@@ -13,7 +13,7 @@ pipeline {
         stage('Example Deploy') {
             steps {
                 script {
-                    nv.each { key, value -> echo "${key} = ${value}" }
+                    env.each { key, value -> echo "${key} = ${value}" }
                 }
             }
         }
