@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'Let's see: $SERVICE_CREDS"'
+                    sh 'Let's see: $SERVICE_CREDS'
                 }
             }
         }
