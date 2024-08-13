@@ -7,13 +7,13 @@ pipeline {
       string(name: 'param4', defaultValue: '', description: 'Choose param')
     }
     stages {
-        stage(''){
+        stage('temp1'){
           steps{
             sh 'printenv'
 
           }
         }
-        stage('') {
+        stage('temp2') {
             steps {
                 sh '''
                 
