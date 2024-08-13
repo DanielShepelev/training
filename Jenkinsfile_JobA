@@ -21,7 +21,7 @@ pipeline {
         }
         stage('triggerChildJob') {
             steps {
-                build job: "Job_B", wait: true parameters: [string(name: 'HELLO', value: ${param3})]
+                build job: "Job_B", wait: true parameters: [string(name: 'HELLO', value: $param3)]
             }
     }
 }
