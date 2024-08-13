@@ -16,7 +16,7 @@ pipeline {
         stage('temp2') {
             steps {
               sh 'chmod +x bash.sh'
-              sh './bash.sh param1 param2 param3 param4'
+              sh './bash.sh $param1 $param2 $param3 $param4'
             }
         }
     }
