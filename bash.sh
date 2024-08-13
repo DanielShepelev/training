@@ -3,7 +3,7 @@
 declare -A seen_strings
  
 for string in "$@"; do
-  if [[ -n "${seen_strings[$string]}" ] then  
+  if [[ -n "${seen_strings[$string]}" ]] then  
     echo Duplicate found: string"
     exit 0
   fi
