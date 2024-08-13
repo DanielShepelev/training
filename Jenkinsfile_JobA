@@ -19,5 +19,11 @@ pipeline {
               sh './bash.sh $param1 $param2 $param3 $param4'
             }
         }
+    stage ('Starting ART job') {
+    build job: 'Jenkinsfile_B', parameters: [[ name: 'systemname', value: param3]]
+    }
+    stage ('Starting ART job') {
+    build job: 'Jenkinsfile_C', parameters: [[ name: 'systemname', value: param4]]
+    }
     }
 }
